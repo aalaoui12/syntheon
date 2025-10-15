@@ -20,8 +20,9 @@ def extract_pitch(signal, sampling_rate, block_size, model_capacity="full"):
     length = signal.shape[-1] // block_size
     f0 = torchcrepe.predict(
         signal, 
-        sampling_rate
+        sampling_rate,
     )
+    f0 = f0.squeeze()
 
     if f0.shape[-1] != length:
         f0 = np.interp(

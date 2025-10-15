@@ -125,7 +125,6 @@ def extract_loudness(audio, sampling_rate, block_size=None, n_fft=2048, frame_ra
     audio = audio[None, :] if is_1d else audio
 
     # Take STFT.
-    overlap = 1 - block_size / n_fft
     amplitude = torch.stft(audio, n_fft=n_fft, hop_length=block_size, center=True, pad_mode='reflect', return_complex=True).abs()
     amplitude = amplitude[:, :, :-1]
     
